@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    
+    <!-- Premium dark plum background shape -->
+    <path
+        android:fillColor="#3C2A3F"
+        android:pathData="M12,0 C5.37,0 0,5.37 0,12 L0,96 C0,102.63 5.37,108 12,108 L96,108 C102.63,108 108,102.63 108,96 L108,12 C108,5.37 102.63,0 96,0 Z" />
+    
+    <!-- Outer concentric circular glow in soft pink -->
+    <path
+        android:fillColor="#F7D9E3"
+        android:fillAlpha="0.15"
+        android:pathData="M54,54m-42,0a42,42 0,1 1,84 0a42,42 0,1 1,-84 0" />
+
+    <!-- Concentric thin accent ring -->
+    <path
+        android:strokeColor="#D35271"
+        android:strokeWidth="1.5"
+        android:strokeAlpha="0.3"
+        android:strokeLineCap="round"
+        android:pathData="M54,54m-34,0a34,34 0,1 1,68 0a34,34 0,1 1,-68 0" />
+
+    <!-- Overlapping rose-red droplets/lotus shape -->
+    <path
+        android:fillColor="#D35271"
+        android:pathData="M54,34C54,34 71,51 71,63C71,72.4 63.4,80 54,80C44.6,80 37,72.4 37,63C37,51 54,34 54,34Z" />
+        
+    <!-- Stylized inner accent petal highlight -->
+    <path
+        android:fillColor="#F7D9E3"
+        android:pathData="M54,42.5C49.85,48.38 44.55,55 44.55,59.9C44.55,65.12 48.78,69.35 54,69.35C59.22,69.35 63.45,65.12 63.45,59.9C63.45,55 58.15,48.38 54,42.5Z" />
+</vector>

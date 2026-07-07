@@ -1,0 +1,297 @@
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+@import "tailwindcss";
+
+:root {
+  --brand-bg: #FFFDFD; /* Clean soft white-rose background */
+  --brand-text: #4E252E; /* Beautiful deep dark plum/burgundy instead of deep purple #3C2A3F */
+  --brand-lavender: #FCE4E6; /* Modern pastel rose-pink */
+  --brand-pink: #F7A8B8; /* Beautiful elegant pink */
+  --brand-peach: #E45B75; /* Elegant modern rose-red */
+  --brand-outer: #FDF1F3; /* Very soft cream rose */
+  --brand-border: #F3C6CE; /* Soft aesthetic pink border */
+
+  /* Overrides for standard lavender, peach, and pink classes in light mode to replace dominant lavender */
+  .bg-\[\#3C2A3F\] {
+    background-color: #E45B75 !important; /* Elegant rose-red/pink */
+  }
+  .hover\:bg-\[\#523B56\]:hover {
+    background-color: #C23E56 !important; /* Darker rose-red for hover */
+  }
+  .text-\[\#3C2A3F\] {
+    color: #4E252E !important; /* Elegant deep plum */
+  }
+  .text-\[\#3C2A3F\]\/40 {
+    color: rgba(78, 37, 46, 0.4) !important;
+  }
+  .text-\[\#3C2A3F\]\/50 {
+    color: rgba(78, 37, 46, 0.5) !important;
+  }
+  .text-\[\#3C2A3F\]\/60 {
+    color: rgba(78, 37, 46, 0.6) !important;
+  }
+  .text-\[\#3C2A3F\]\/70 {
+    color: rgba(78, 37, 46, 0.7) !important;
+  }
+  .text-\[\#3C2A3F\]\/75 {
+    color: rgba(78, 37, 46, 0.75) !important;
+  }
+  .text-\[\#3C2A3F\]\/80 {
+    color: rgba(78, 37, 46, 0.8) !important;
+  }
+  .text-\[\#3C2A3F\]\/85 {
+    color: rgba(78, 37, 46, 0.85) !important;
+  }
+
+  .bg-\[\#E9E3F5\] {
+    background-color: #FCE4E6 !important; /* Soft blush pink instead of lavender */
+  }
+  .bg-\[\#E9E3F5\]\/30 {
+    background-color: rgba(252, 228, 230, 0.3) !important;
+  }
+  .bg-\[\#F7D9E3\] {
+    background-color: #F7A8B8 !important; /* Beautiful rose-pink instead of lavender-pink */
+  }
+  .bg-\[\#FCE6D5\] {
+    background-color: #FFD4DA !important; /* Very soft rose pink */
+  }
+  .bg-\[\#FCE6D5\]\/75 {
+    background-color: rgba(255, 212, 218, 0.75) !important;
+  }
+  .border-\[\#3C2A3F\]\/10 {
+    border-color: rgba(78, 37, 46, 0.1) !important;
+  }
+  .border-\[\#3C2A3F\]\/20 {
+    border-color: rgba(78, 37, 46, 0.2) !important;
+  }
+  .border-\[\#3C2A3F\]\/5 {
+    border-color: rgba(78, 37, 46, 0.05) !important;
+  }
+  .border-\[\#3C2A3F\]\/30 {
+    border-color: rgba(78, 37, 46, 0.25) !important;
+  }
+  .border-\[\#3C2A3F\]\/40 {
+    border-color: rgba(78, 37, 46, 0.4) !important;
+  }
+
+  /* SVGs and lines */
+  .stroke-\[\#3C2A3F\] {
+    stroke: #E45B75 !important;
+  }
+  .stroke-\[\#3C2A3F\]\/60 {
+    stroke: rgba(228, 91, 117, 0.6) !important;
+  }
+}
+
+:root.theme-warm-peach {
+  --brand-bg: #FFFBF6;
+  --brand-text: #5C3224;
+  --brand-lavender: #FCD8C1;
+  --brand-pink: #FEE8C8;
+  --brand-peach: #F5C7C7;
+  --brand-outer: #F2ECE0;
+  --brand-border: #E8DAC8;
+}
+
+:root.theme-soft-mint {
+  --brand-bg: #F4FAF6;
+  --brand-text: #234032;
+  --brand-lavender: #D6EFE0;
+  --brand-pink: #D3EAEB;
+  --brand-peach: #FCF0C8;
+  --brand-outer: #E3EDE7;
+  --brand-border: #D1E0D7;
+}
+
+:root.theme-twilight-dark {
+  --brand-bg: #000000; /* Pure OLED pitch black background */
+  --brand-text: #FFF0F2; /* Soft elegant pinkish-white text */
+  --brand-lavender: #2B0C11; /* Soothing dark wine accent */
+  --brand-pink: #E33E5A; /* Classic aesthetic rose-red */
+  --brand-peach: #FF6685; /* Beautiful pink accent */
+  --brand-outer: #000000; /* Pitch black phone frame */
+  --brand-border: #4E141D; /* Deep dark wine border */
+}
+
+/* Elegant class overrides for OLED Dark Mode */
+:root.theme-twilight-dark {
+  .bg-\[\#FDF9F3\]\/80 {
+    background-color: rgba(8, 4, 6, 0.8) !important;
+  }
+  .bg-\[\#FDF9F3\]\/60 {
+    background-color: rgba(8, 4, 6, 0.6) !important;
+  }
+  .bg-\[\#FDF9F3\]\/95 {
+    background-color: rgba(8, 4, 6, 0.95) !important;
+  }
+  .bg-\[\#FDF9F3\]\/40 {
+    background-color: rgba(8, 4, 6, 0.4) !important;
+  }
+  .bg-\[\#FDF9F3\]\/70 {
+    background-color: rgba(8, 4, 6, 0.7) !important;
+  }
+  .bg-white\/70 {
+    background-color: rgba(15, 6, 8, 0.7) !important;
+  }
+  .bg-white\/60 {
+    background-color: rgba(15, 6, 8, 0.6) !important;
+  }
+  .bg-white\/80 {
+    background-color: rgba(15, 6, 8, 0.8) !important;
+  }
+  .bg-white {
+    background-color: #0A0406 !important;
+  }
+  .bg-\[\#E9E3F5\] {
+    background-color: #2D0B12 !important; /* Wine/burgundy instead of purple */
+  }
+  .bg-\[\#F7D9E3\] {
+    background-color: #4D121B !important;
+  }
+  .bg-\[\#FCE6D5\] {
+    background-color: #5C1622 !important;
+  }
+  .bg-\[\#E9E3F5\]\/30 {
+    background-color: rgba(45, 11, 18, 0.3) !important;
+  }
+  .bg-\[\#FCE6D5\]\/75 {
+    background-color: rgba(92, 22, 34, 0.75) !important;
+  }
+  .bg-\[\#3C2A3F\] {
+    background-color: #E33E5A !important; /* Beautiful glowing rose-red/pink */
+  }
+  .bg-\[\#3C2A3F\]\/5 {
+    background-color: rgba(227, 62, 90, 0.08) !important;
+  }
+  .bg-\[\#2B1D2F\] {
+    background-color: #000000 !important;
+  }
+  .bg-\[\#1C131E\] {
+    background-color: #000000 !important;
+  }
+  .bg-\[\#F3EFE6\] {
+    background-color: #000000 !important;
+  }
+  
+  /* Text overrides */
+  .text-\[\#3C2A3F\] {
+    color: #FFF0F2 !important;
+  }
+  .text-\[\#3C2A3F\]\/40 {
+    color: rgba(255, 240, 242, 0.4) !important;
+  }
+  .text-\[\#3C2A3F\]\/50 {
+    color: rgba(255, 240, 242, 0.5) !important;
+  }
+  .text-\[\#3C2A3F\]\/60 {
+    color: rgba(255, 240, 242, 0.6) !important;
+  }
+  .text-\[\#3C2A3F\]\/70 {
+    color: rgba(255, 240, 242, 0.7) !important;
+  }
+  .text-\[\#3C2A3F\]\/75 {
+    color: rgba(255, 240, 242, 0.75) !important;
+  }
+  .text-\[\#3C2A3F\]\/80 {
+    color: rgba(255, 240, 242, 0.8) !important;
+  }
+  .text-\[\#3C2A3F\]\/85 {
+    color: rgba(255, 240, 242, 0.85) !important;
+  }
+  .text-\[\#FDF9F3\] {
+    color: #FFF0F2 !important;
+  }
+  .text-\[\#FDF9F3\]\/80 {
+    color: rgba(255, 240, 242, 0.8) !important;
+  }
+  .text-\[\#FDF9F3\]\/60 {
+    color: rgba(255, 240, 242, 0.6) !important;
+  }
+  .text-\[\#FDF9F3\]\/50 {
+    color: rgba(255, 240, 242, 0.5) !important;
+  }
+  .text-\[\#FDF9F3\]\/40 {
+    color: rgba(255, 240, 242, 0.4) !important;
+  }
+  .text-\[\#FDF9F3\]\/90 {
+    color: rgba(255, 240, 242, 0.9) !important;
+  }
+  .text-\[\#FDF9F3\]\/75 {
+    color: rgba(255, 240, 242, 0.75) !important;
+  }
+  
+  /* Borders */
+  .border-\[\#3C2A3F\]\/10 {
+    border-color: rgba(255, 240, 242, 0.1) !important;
+  }
+  .border-\[\#3C2A3F\]\/20 {
+    border-color: rgba(255, 240, 242, 0.2) !important;
+  }
+  .border-\[\#3C2A3F\]\/5 {
+    border-color: rgba(255, 240, 242, 0.05) !important;
+  }
+  .border-\[\#3C2A3F\]\/40 {
+    border-color: rgba(255, 240, 242, 0.4) !important;
+  }
+  .border-\[\#3C2A3F\]\/30 {
+    border-color: rgba(255, 240, 242, 0.25) !important;
+  }
+  
+  /* Buttons */
+  .hover\:bg-\[\#523B56\]:hover {
+    background-color: #C22D46 !important;
+  }
+  
+  /* SVGs */
+  .stroke-\[\#3C2A3F\] {
+    stroke: #FF6685 !important;
+  }
+  .stroke-\[\#3C2A3F\]\/60 {
+    stroke: rgba(255, 102, 133, 0.6) !important;
+  }
+}
+
+@theme {
+  --font-serif: "Fraunces", Georgia, serif;
+  --font-sans: "Plus Jakarta Sans", "Inter", sans-serif;
+  
+  --color-brand-bg: var(--brand-bg);
+  --color-brand-text: var(--brand-text);
+  --color-brand-lavender: var(--brand-lavender);
+  --color-brand-pink: var(--brand-pink);
+  --color-brand-peach: var(--brand-peach);
+  --color-brand-outer: var(--brand-outer);
+  --color-brand-border: var(--brand-border);
+}
+
+@layer utilities {
+  .arch-shape {
+    border-radius: 9999px 9999px 24px 24px;
+  }
+}
+
+/* Base custom styling to support smooth transitions and elegant inputs */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--brand-outer);
+  color: var(--brand-text);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Thin custom scrollbars to maintain the pristine aesthetic */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--brand-lavender);
+  border-radius: 999px;
+  transition: background-color 0.3s ease;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--brand-peach);
+}
+
+
