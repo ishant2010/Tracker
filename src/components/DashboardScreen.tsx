@@ -56,7 +56,7 @@ export function DashboardScreen({ onOpenLog, stats, todayStr, onDbUpdated, onOpe
   }>>([
     {
       sender: 'bot',
-      text: "Welcome to your Sanctuary assistant! 🌸 I am now powered by Gemini, silently aware of your local cycle phase and symptoms to provide deeply personalized, secure, and scientifically accurate health care tips. Ask me anything, or speak-log symptoms to update your database.",
+      text: "Welcome to your Dinocycle assistant! 🦖 I am now powered by Gemini, silently aware of your local cycle phase and symptoms to provide deeply personalized, secure, and scientifically accurate health care tips. Ask me anything, or speak-log symptoms to update your database.",
       timestamp: '12:00 PM'
     }
   ]);
@@ -216,14 +216,14 @@ export function DashboardScreen({ onOpenLog, stats, todayStr, onDbUpdated, onOpe
         type: 'cramps' as const,
         title: "Tough Cramps Detected",
         message: "I noticed you're having tough cramps today. Want me to suggest some quick relief exercises or teas?",
-        actionText: "Ask Sanctuary AI for Relief",
+        actionText: "Ask Dinocycle AI for Relief",
       };
     } else if (hasAnxiety) {
       return {
         type: 'anxiety' as const,
         title: "High Anxiety Detected",
         message: "I noticed you're feeling anxious today. Want to try some grounding exercises or relaxing teas?",
-        actionText: "Calm Mind with Sanctuary AI",
+        actionText: "Calm Mind with Dinocycle AI",
       };
     }
     return null;
@@ -599,7 +599,7 @@ export function DashboardScreen({ onOpenLog, stats, todayStr, onDbUpdated, onOpe
                     <Bot className="w-4.5 h-4.5 text-[#F7D9E3]" />
                   </div>
                   <div>
-                    <h3 className="font-serif italic text-sm font-bold text-brand-text">Health Sanctuary AI</h3>
+                    <h3 className="font-serif italic text-sm font-bold text-brand-text">Health Dinocycle AI</h3>
                     <span className="text-[8.5px] font-mono text-[#8B5CF6] font-extrabold flex items-center gap-1">
                       <span className="w-1.5 h-1.5 bg-[#A78BFA] rounded-full animate-ping" />
                       100% SECURE & DATA-AWARE

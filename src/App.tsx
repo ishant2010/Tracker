@@ -266,7 +266,7 @@ export default function App() {
       <div className="min-h-screen bg-[#F3EFE6] text-[#3C2A3F] flex items-center justify-center font-sans font-semibold">
         <div className="flex flex-col items-center space-y-3">
           <div className="w-12 h-12 rounded-full border-4 border-[#3C2A3F]/10 border-t-[#3C2A3F] animate-spin" />
-          <span className="text-xs text-[#3C2A3F]/60 font-sans uppercase tracking-widest font-bold">Sanctuary Vault...</span>
+          <span className="text-xs text-[#3C2A3F]/60 font-sans uppercase tracking-widest font-bold">Dinocycle Vault...</span>
         </div>
       </div>
     );
@@ -317,7 +317,7 @@ export default function App() {
                 {/* Status Indicator Bar */}
                 <div className="flex justify-between items-center text-[9px] font-mono font-bold text-brand-text/45 pb-2 border-b border-brand-text/5">
                   <span>🔒 OFFLINE VAULT</span>
-                  <span>SANCTUARY PROTECTED</span>
+                  <span>DINOCYCLE PROTECTED</span>
                 </div>
 
                 <div className="flex-1 flex flex-col items-center justify-center space-y-6">
@@ -330,7 +330,7 @@ export default function App() {
                   </motion.div>
                   
                   <div className="text-center space-y-1.5">
-                    <h2 className="font-serif italic text-lg font-bold text-brand-text">Sanctuary Lock</h2>
+                    <h2 className="font-serif italic text-lg font-bold text-brand-text">Dinocycle Lock</h2>
                     <p className="text-[10.5px] text-brand-text/60 font-sans">
                       Enter 4-digit PIN or scan biometric fingerprint
                     </p>

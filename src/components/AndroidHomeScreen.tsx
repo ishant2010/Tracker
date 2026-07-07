@@ -329,7 +329,7 @@ export function AndroidHomeScreen({ onLaunchApp, todayStr, onDbUpdated, theme }:
         {/* Dock Launcher Apps */}
         <div className="flex justify-around items-center px-4">
           
-          {/* Main App Sanctuary Launcher Icon */}
+          {/* Main App Dinocycle Launcher Icon */}
           <div className="flex flex-col items-center gap-1">
             <motion.button
               id="home-icon-sanctuary"
@@ -339,28 +339,59 @@ export function AndroidHomeScreen({ onLaunchApp, todayStr, onDbUpdated, theme }:
               }}
               whileHover={{ scale: 1.15 }}
               whileTap={{ scale: 0.9 }}
-              className="w-13 h-13 rounded-3xl bg-[#3C2A3F] flex items-center justify-center text-white border border-white/10 shadow-[0_8px_20px_rgba(60,42,63,0.18)] cursor-pointer relative"
+              className="w-13 h-13 rounded-3xl bg-[#FDF9F3] flex items-center justify-center text-white border border-brand-text/10 shadow-[0_8px_20px_rgba(60,42,63,0.18)] cursor-pointer relative p-2"
             >
               <svg 
-                className="w-7 h-7 text-[#F7D9E3]" 
-                viewBox="0 0 24 24" 
-                fill="currentColor"
+                className="w-full h-full text-brand-text" 
+                viewBox="0 0 100 100" 
+                fill="none" 
                 xmlns="http://www.w3.org/2000/svg"
               >
-                <path d="M12 2C12 2 19 9 19 14C19 17.866 15.866 21 12 21C8.13401 21 5 17.866 5 14C5 9 12 2 12 2ZM12 6.18C10.15 8.79 7.8 11.72 7.8 13.9C7.8 16.22 9.68 18.1 12 18.1C14.32 18.1 16.2 16.22 16.2 13.9C16.2 11.72 13.85 8.79 12 6.18Z" />
+                <circle cx="50" cy="50" r="40" stroke="#F7D9E3" stroke-width="6" fill="none" />
+                <path d="M 50 10 A 40 40 0 0 1 90 50" stroke="#D35271" stroke-width="6" stroke-linecap="round" fill="none" />
+                <g transform="translate(24, 24) scale(0.52)" fill="none" stroke="#3C2A3F" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M 24 50 
+                           C 28 50, 32 47, 36 43
+                           C 40 39, 44 35, 52 35
+                           C 54 35, 56 34, 58 32
+                           C 60 30, 61 27, 65 27
+                           C 69 27, 71 29, 72 32
+                           C 73 35, 71 37, 67 37
+                           C 64 37, 63 39, 64 41
+                           C 65 43, 62 44, 58 44
+                           C 56 47, 55 50, 53 53
+                           C 55 54, 57 54, 58 53
+                           C 59 52, 60 52, 60 53
+                           C 60 54, 59 55, 57 55
+                           C 55 56, 54 57, 53 58
+                           C 51 61, 50 64, 49 68
+                           C 49 71, 51 72, 53 72
+                           L 57 72
+                           C 58 72, 58 71, 57 69
+                           C 56 66, 55 62, 55 59
+                           C 51 59, 48 62, 46 66
+                           C 45 68, 44 71, 45 72
+                           L 49 72
+                           C 50 72, 50 71, 49 69
+                           C 48 66, 47 62, 46 59
+                           C 42 59, 39 58, 36 57
+                           C 28 55, 20 53, 14 53
+                           C 18 52, 21 51, 24 50 Z" />
+                  <circle cx="64" cy="31" r="2.5" fill="#3C2A3F" stroke="none" />
+                </g>
               </svg>
               {/* Notification Badging */}
-              <div className="absolute -top-1 -right-1 w-4.5 h-4.5 bg-rose-500 border-2 border-brand-bg rounded-full flex items-center justify-center text-[8px] font-sans font-bold text-white animate-bounce">
+              <div className="absolute -top-1 -right-1 w-4.5 h-4.5 bg-rose-500 border-2 border-[#FDF9F3] rounded-full flex items-center justify-center text-[8px] font-sans font-bold text-white animate-bounce">
                 1
               </div>
             </motion.button>
-            <span className="text-[10px] font-sans font-bold text-brand-text/75">Sanctuary</span>
+            <span className="text-[10px] font-sans font-bold text-brand-text/75">Dinocycle</span>
           </div>
 
           {/* Dummy Apps to make Home Screen look authentic */}
           <div className="flex flex-col items-center gap-1 opacity-75 hover:opacity-100 transition-opacity">
             <button 
-              onClick={() => alert("Simulated Calendar App! Launch 'Sanctuary' to log and track symptoms.")}
+              onClick={() => alert("Simulated Calendar App! Launch 'Dinocycle' to log and track symptoms.")}
               className="w-13 h-13 rounded-3xl bg-[#FCE6D5]/80 flex items-center justify-center border border-brand-text/5 shadow-md cursor-pointer"
             >
               <span className="text-xl">📅</span>
@@ -370,7 +401,7 @@ export function AndroidHomeScreen({ onLaunchApp, todayStr, onDbUpdated, theme }:
 
           <div className="flex flex-col items-center gap-1 opacity-75 hover:opacity-100 transition-opacity">
             <button 
-              onClick={() => alert("Simulated Contacts App! Sanctuary is 100% offline and never shares your logs with anyone.")}
+              onClick={() => alert("Simulated Contacts App! Dinocycle is 100% offline and never shares your logs with anyone.")}
               className="w-13 h-13 rounded-3xl bg-[#E9E3F5]/80 flex items-center justify-center border border-brand-text/5 shadow-md cursor-pointer"
             >
               <span className="text-xl">👥</span>
@@ -380,7 +411,7 @@ export function AndroidHomeScreen({ onLaunchApp, todayStr, onDbUpdated, theme }:
 
           <div className="flex flex-col items-center gap-1 opacity-75 hover:opacity-100 transition-opacity">
             <button 
-              onClick={() => alert("Offline Vault Settings are managed inside Sanctuary > Trends > Security App Lock.")}
+              onClick={() => alert("Offline Vault Settings are managed inside Dinocycle > Trends > Security App Lock.")}
               className="w-13 h-13 rounded-3xl bg-white/70 flex items-center justify-center border border-brand-text/5 shadow-md cursor-pointer"
             >
               <span className="text-xl">⚙️</span>

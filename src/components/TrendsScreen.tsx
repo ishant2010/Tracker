@@ -428,7 +428,7 @@ export function TrendsScreen({ stats, onDbUpdated, todayStr, onTriggerNotificati
     const url = URL.createObjectURL(blob);
     const link = document.createElement('a');
     link.href = url;
-    link.setAttribute('download', `Sisterhood_Sanctuary_Health_Report.txt`);
+    link.setAttribute('download', `DINOCYCLE_Health_Report.txt`);
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -1424,7 +1424,7 @@ CREATE TABLE IF NOT EXISTS user_settings (
             </div>
 
             <p className="text-[10.5px] text-brand-text/75 font-sans leading-relaxed transition-colors duration-300">
-              Your home widgets (Small 2x2 Quick Glance and Medium 4x2 Daily Action Board) are beautifully styled and fully integrated directly to your local sandboxed room database. Tapping or using them automatically syncs data inside Sanctuary.
+              Your home widgets (Small 2x2 Quick Glance and Medium 4x2 Daily Action Board) are beautifully styled and fully integrated directly to your local sandboxed room database. Tapping or using them automatically syncs data inside Dinocycle.
             </p>
 
             <div className="grid grid-cols-2 gap-2 text-center pt-1.5">

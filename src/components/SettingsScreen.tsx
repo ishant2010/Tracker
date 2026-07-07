@@ -48,6 +48,58 @@ const PRESET_AVATARS = [
 export function SettingsScreen({ onClose, onThemeChanged, onDbUpdated }: SettingsScreenProps) {
   const user = auth.currentUser;
 
+  // PWA & Installation states
+  const [isStandalone, setIsStandalone] = useState(false);
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+
+  useEffect(() => {
+    // Check if currently running in standalone display mode (already installed)
+    const checkStandalone = () => {
+      const isStandaloneMode = 
+        window.matchMedia('(display-mode: standalone)').matches || 
+        (window.navigator as any).standalone === true ||
+        document.referrer.includes('android-app://');
+      setIsStandalone(isStandaloneMode);
+    };
+
+    checkStandalone();
+
+    // Catch the deferred prompt if it already happened
+    if ((window as any).deferredPrompt) {
+      setDeferredPrompt((window as any).deferredPrompt);
+    }
+
+    const handlePrompt = (e: any) => {
+      setDeferredPrompt((window as any).deferredPrompt || e);
+    };
+
+    window.addEventListener('beforeinstallprompt', handlePrompt);
+    window.addEventListener('pwa-prompt-available', handlePrompt);
+
+    return () => {
+      window.removeEventListener('beforeinstallprompt', handlePrompt);
+      window.removeEventListener('pwa-prompt-available', handlePrompt);
+    };
+  }, []);
+
+  const handleInstallClick = async () => {
+    const promptEvent = deferredPrompt || (window as any).deferredPrompt;
+    if (promptEvent) {
+      promptEvent.prompt();
+      const { outcome } = await promptEvent.userChoice;
+      console.log(`User response to install prompt: ${outcome}`);
+      setDeferredPrompt(null);
+      (window as any).deferredPrompt = null;
+    } else {
+      const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+      if (isIOS) {
+        alert("To install DINOCYCLE on iOS: Tap the 'Share' button in Safari's toolbar, scroll down, and select 'Add to Home Screen' 🦖");
+      } else {
+        alert("To install: Use your browser's menu (usually three dots in top-right or address bar) and select 'Install App' or 'Add to home screen' 🌸");
+      }
+    }
+  };
+
   // Profile States
   const [displayName, setDisplayName] = useState(user?.displayName || '');
   const [selectedAvatar, setSelectedAvatar] = useState(user?.photoURL || 'lavender');
@@ -534,7 +586,7 @@ export function SettingsScreen({ onClose, onThemeChanged, onDbUpdated }: Setting
                   Secure Cloud Synchronization
                 </span>
                 <span className="text-[9.5px] text-[#3C2A3F]/55 leading-relaxed mt-0.5">
-                  Keep data strictly on this device (offline-only) or sync securely to your Sanctuary cloud vault in real-time.
+                  Keep data strictly on this device (offline-only) or sync securely to your DINOCYCLE cloud vault in real-time.
                 </span>
               </div>
               <button
@@ -590,6 +642,32 @@ export function SettingsScreen({ onClose, onThemeChanged, onDbUpdated }: Setting
             )}
           </div>
         </div>
+
+        {/* App Options / PWA Installation Section */}
+        {!isStandalone && (
+          <div className="bg-white/60 rounded-[28px] p-5 border border-brand-text/5 space-y-4 animate-fade-in">
+            <span className="text-[9px] uppercase tracking-widest text-[#3C2A3F]/50 font-bold font-sans flex items-center gap-1.5">
+              <Sparkles className="w-3.5 h-3.5 text-[#D35271]" /> App Options
+            </span>
+
+            <div className="space-y-3">
+              <p className="text-[10px] text-[#3C2A3F]/60 font-sans leading-relaxed">
+                Install DINOCYCLE directly to your device for dynamic home screen access, offline readiness, and faster performance.
+              </p>
+
+              <motion.button
+                id="pwa-install-btn"
+                onClick={handleInstallClick}
+                whileTap={{ scale: 0.95 }}
+                whileHover={{ scale: 1.02 }}
+                className="w-full py-3 px-4 rounded-xl bg-gradient-to-r from-[#D35271] to-[#E97692] hover:opacity-95 text-xs font-sans font-bold text-white shadow-sm flex items-center justify-center gap-2 cursor-pointer transition-all min-h-[44px]"
+              >
+                <Download className="w-4 h-4" />
+                <span>Download App to Phone</span>
+              </motion.button>
+            </div>
+          </div>
+        )}
 
         {/* Account Management Actions */}
         <div className="bg-white/60 rounded-[28px] p-5 border border-brand-text/5 space-y-3">

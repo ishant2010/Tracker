@@ -98,15 +98,53 @@ export function AuthScreen({ onAuthSuccess }: AuthScreenProps) {
 
       {/* Header section */}
       <div className="flex flex-col items-center text-center mt-8 space-y-4 relative z-10">
-        <div className="w-16 h-16 rounded-3xl bg-brand-lavender flex items-center justify-center border border-brand-text/5 shadow-sm">
-          <Sparkles className="w-7 h-7 text-[#3C2A3F]" />
+        <div className="w-16 h-16 rounded-3xl bg-brand-lavender flex items-center justify-center border border-brand-text/5 shadow-sm p-3 overflow-hidden">
+          <svg 
+            className="w-full h-full text-[#3C2A3F]" 
+            viewBox="0 0 100 100" 
+            fill="none" 
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <circle cx="50" cy="50" r="40" stroke="#FCE6D5" stroke-width="6" fill="none" />
+            <path d="M 50 10 A 40 40 0 0 1 90 50" stroke="#D35271" stroke-width="6" stroke-linecap="round" fill="none" />
+            <g transform="translate(24, 24) scale(0.52)" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M 24 50 
+                       C 28 50, 32 47, 36 43
+                       C 40 39, 44 35, 52 35
+                       C 54 35, 56 34, 58 32
+                       C 60 30, 61 27, 65 27
+                       C 69 27, 71 29, 72 32
+                       C 73 35, 71 37, 67 37
+                       C 64 37, 63 39, 64 41
+                       C 65 43, 62 44, 58 44
+                       C 56 47, 55 50, 53 53
+                       C 55 54, 57 54, 58 53
+                       C 59 52, 60 52, 60 53
+                       C 60 54, 59 55, 57 55
+                       C 55 56, 54 57, 53 58
+                       C 51 61, 50 64, 49 68
+                       C 49 71, 51 72, 53 72
+                       L 57 72
+                       C 58 72, 58 71, 57 69
+                       C 56 66, 55 62, 55 59
+                       C 51 59, 48 62, 46 66
+                       C 45 68, 44 71, 45 72
+                       L 49 72
+                       C 50 72, 50 71, 49 69
+                       C 48 66, 47 62, 46 59
+                       C 42 59, 39 58, 36 57
+                       C 28 55, 20 53, 14 53
+                       C 18 52, 21 51, 24 50 Z" />
+              <circle cx="64" cy="31" r="2.5" fill="currentColor" stroke="none" />
+            </g>
+          </svg>
         </div>
         <div className="space-y-1">
-          <h1 className="font-serif italic text-3xl font-semibold text-[#3C2A3F]">
-            Sanctuary Vesta
+          <h1 className="font-serif italic text-3xl font-semibold text-[#3C2A3F] uppercase tracking-wider">
+            DINOCYCLE
           </h1>
           <p className="text-xs text-[#3C2A3F]/60 font-medium tracking-wide">
-            Your private cycle & health companion
+            Your private dinosaur-themed cycle companion
           </p>
         </div>
       </div>

@@ -3,8 +3,8 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-import React, { useState, useEffect } from 'react';
-import { Home, Calendar, LineChart, Wifi, Battery, ShieldAlert, Database, Info } from 'lucide-react';
+import React from 'react';
+import { Home, Calendar, LineChart, ShieldAlert, Database } from 'lucide-react';
 
 interface PhoneContainerProps {
   children: React.ReactNode;
@@ -15,228 +15,197 @@ interface PhoneContainerProps {
 }
 
 export function PhoneContainer({ children, activeTab = 'home', setActiveTab = () => {}, hideNavigation = false, onHomeClick }: PhoneContainerProps) {
-  const [time, setTime] = useState('11:54 AM');
-
-  // Simple clock effect to show in the Android Status Bar
-  useEffect(() => {
-    const updateTime = () => {
-      const now = new Date();
-      let hours = now.getHours();
-      const minutes = String(now.getMinutes()).padStart(2, '0');
-      const ampm = hours >= 12 ? 'PM' : 'AM';
-      hours = hours % 12;
-      hours = hours ? hours : 12; // the hour '0' should be '12'
-      setTime(`${hours}:${minutes} ${ampm}`);
-    };
-    updateTime();
-    const interval = setInterval(updateTime, 10000);
-    return () => clearInterval(interval);
-  }, []);
-
   return (
-    <div className="min-h-screen bg-brand-outer md:bg-brand-bg flex flex-col items-center justify-center md:py-0 md:px-0 py-6 px-4 select-none transition-colors duration-300">
+    <div className="w-full h-screen min-h-screen bg-brand-bg flex flex-col md:flex-row select-none transition-colors duration-300 overflow-hidden relative">
       
-      {/* Physical Smartphone Shell Mockup for Mobile, Full Responsive Canvas for Desktop */}
-      <div 
-        id="android-phone-mockup"
-        className={`w-full bg-brand-bg flex transition-all duration-300 ${
-          hideNavigation 
-            ? 'max-w-[410px] h-[820px] rounded-[48px] border-[12px] border-brand-border shadow-[0_24px_64px_rgba(60,42,63,0.08)] flex-col overflow-hidden relative'
-            : 'max-w-[410px] h-[820px] md:max-w-none md:h-screen md:w-screen rounded-[48px] md:rounded-none border-[12px] md:border-0 border-brand-border md:shadow-none shadow-[0_24px_64px_rgba(60,42,63,0.08)] flex-col md:flex-row overflow-hidden relative'
-        }`}
-      >
-        {/* Sleek Side Navigation Drawer (Sidebar) for Tablet & Desktop */}
-        {!hideNavigation && (
-          <aside 
-            id="desktop-sidebar"
-            className="hidden md:flex flex-col w-64 lg:w-72 bg-brand-bg border-r border-brand-text/10 p-6 shrink-0 relative z-40 transition-all duration-300"
-          >
-            {/* Header / Brand logo */}
-            <div className="flex items-center gap-3 mb-8 px-2">
-              <div className="w-10 h-10 rounded-2xl bg-brand-lavender flex items-center justify-center text-brand-peach border border-brand-text/5 shadow-sm">
-                <span className="text-2xl">🌸</span>
-              </div>
-              <div>
-                <h1 className="font-serif italic text-lg font-bold text-brand-text leading-tight">Sanctuary</h1>
-                <span className="text-[9px] font-mono font-bold text-brand-text/45 tracking-wider uppercase">Cycle Companion</span>
-              </div>
-            </div>
-
-            {/* Navigation links */}
-            <nav className="flex-1 space-y-2">
-              <button
-                onClick={() => setActiveTab('home')}
-                className={`flex items-center gap-3.5 w-full px-4 py-3.5 rounded-2xl text-xs font-sans font-bold transition-all duration-200 cursor-pointer ${
-                  activeTab === 'home'
-                    ? 'bg-brand-lavender text-brand-text shadow-sm border border-brand-text/5'
-                    : 'text-brand-text/60 hover:text-brand-text hover:bg-brand-lavender/30'
-                }`}
-              >
-                <Home className="w-5 h-5 shrink-0" />
-                <span>Home Dashboard</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('calendar')}
-                className={`flex items-center gap-3.5 w-full px-4 py-3.5 rounded-2xl text-xs font-sans font-bold transition-all duration-200 cursor-pointer ${
-                  activeTab === 'calendar'
-                    ? 'bg-brand-lavender text-brand-text shadow-sm border border-brand-text/5'
-                    : 'text-brand-text/60 hover:text-brand-text hover:bg-brand-lavender/30'
-                }`}
-              >
-                <Calendar className="w-5 h-5 shrink-0" />
-                <span>Calendar & Logs</span>
-              </button>
-
-              <button
-                onClick={() => setActiveTab('trends')}
-                className={`flex items-center gap-3.5 w-full px-4 py-3.5 rounded-2xl text-xs font-sans font-bold transition-all duration-200 cursor-pointer ${
-                  activeTab === 'trends'
-                    ? 'bg-brand-lavender text-brand-text shadow-sm border border-brand-text/5'
-                    : 'text-brand-text/60 hover:text-brand-text hover:bg-brand-lavender/30'
-                }`}
-              >
-                <LineChart className="w-5 h-5 shrink-0" />
-                <span>Insights & Trends</span>
-              </button>
-            </nav>
-
-            {/* Sidebar Footer Info */}
-            <div className="pt-4 border-t border-brand-text/5 space-y-2">
-              <div className="flex items-center gap-2 text-[10px] text-brand-text/50 font-sans font-semibold">
-                <Database className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
-                <span>100% Private Local DB</span>
-              </div>
-              <div className="flex items-center gap-2 text-[10px] text-brand-text/50 font-sans font-semibold">
-                <ShieldAlert className="w-3.5 h-3.5 text-rose-500 shrink-0" />
-                <span>Protected Sanctuary</span>
-              </div>
-            </div>
-          </aside>
-        )}
-
-        {/* Physical Camera Notch Pin-hole */}
-        <div className={`absolute top-2 left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-brand-border flex items-center justify-center z-50 transition-colors duration-300 ${!hideNavigation ? 'md:hidden' : ''}`}>
-          <div className="w-2 h-2 rounded-full bg-brand-text transition-colors duration-300" />
-        </div>
-
-        {/* Android Status Bar */}
-        <div className={`h-10 bg-transparent px-6 flex justify-between items-center text-brand-text/80 text-xs font-sans font-bold z-40 shrink-0 transition-colors duration-300 ${!hideNavigation ? 'md:hidden' : ''}`}>
-          <span>{time}</span>
-          <div className="flex items-center gap-1.5">
-            <Wifi className="w-3.5 h-3.5 text-brand-text/80 transition-colors duration-300" />
-            <span className="text-[10px] tracking-tight">5G</span>
-            <div className="flex items-center gap-1">
-              <span className="text-[10px] tracking-tight">98%</span>
-              <div className="w-5 h-2.5 rounded bg-brand-text/10 border border-brand-text/20 p-0.5 flex items-center transition-colors duration-300">
-                <div className="h-full w-[90%] bg-emerald-600 rounded-sm" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/* Application Core Stage (Dynamic Screen Content) */}
-        <div className="flex-1 flex flex-col overflow-hidden relative bg-brand-bg transition-colors duration-300">
-          {/* Natural Tones Background blur bubbles */}
-          <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-brand-pink rounded-full blur-[80px] opacity-40 pointer-events-none z-0 transition-colors duration-500" />
-          <div className="absolute -top-12 -right-12 w-64 h-64 bg-brand-lavender rounded-full blur-[80px] opacity-40 pointer-events-none z-0 transition-colors duration-500" />
-          
-          <div className="flex-1 flex flex-col z-10 overflow-hidden relative">
-            <div className={`flex-1 flex flex-col overflow-y-auto w-full mx-auto ${!hideNavigation ? 'md:max-w-[800px] md:px-8 md:py-8' : ''}`}>
-              {children}
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Navigation Bar */}
-        {!hideNavigation && (
-          <div 
-            id="android-bottom-navigation"
-            className="h-20 bg-brand-bg/90 backdrop-blur-md border-t border-brand-text/5 flex md:hidden justify-around items-center px-4 shrink-0 z-40 transition-colors duration-300"
-          >
-            {/* Dashboard Tab Button */}
-            <button
-              id="nav-btn-home"
-              onClick={() => setActiveTab('home')}
-              className="flex flex-col items-center justify-center flex-1 h-full relative min-h-[48px] touch-manipulation"
-            >
-              <div className={`p-2 rounded-2xl transition-all duration-300 ${
-                activeTab === 'home' 
-                  ? 'bg-brand-lavender text-brand-text scale-105 shadow-sm' 
-                  : 'text-brand-text/60 hover:text-brand-text'
-              }`}>
-                <Home className="w-6 h-6" />
-              </div>
-              <span className={`text-[10px] font-sans font-bold mt-1 tracking-wide transition-colors duration-300 ${
-                activeTab === 'home' ? 'text-brand-text' : 'text-brand-text/60'
-              }`}>
-                Home
-              </span>
-            </button>
-
-            {/* Calendar Tab Button */}
-            <button
-              id="nav-btn-calendar"
-              onClick={() => setActiveTab('calendar')}
-              className="flex flex-col items-center justify-center flex-1 h-full relative min-h-[48px] touch-manipulation"
-            >
-              <div className={`p-2 rounded-2xl transition-all duration-300 ${
-                activeTab === 'calendar' 
-                  ? 'bg-brand-lavender text-brand-text scale-105 shadow-sm' 
-                  : 'text-brand-text/60 hover:text-brand-text'
-              }`}>
-                <Calendar className="w-6 h-6" />
-              </div>
-              <span className={`text-[10px] font-sans font-bold mt-1 tracking-wide transition-colors duration-300 ${
-                activeTab === 'calendar' ? 'text-brand-text' : 'text-brand-text/60'
-              }`}>
-                Calendar
-              </span>
-            </button>
-
-            {/* Trends/Logs Tab Button */}
-            <button
-              id="nav-btn-trends"
-              onClick={() => setActiveTab('trends')}
-              className="flex flex-col items-center justify-center flex-1 h-full relative min-h-[48px] touch-manipulation"
-            >
-              <div className={`p-2 rounded-2xl transition-all duration-300 ${
-                activeTab === 'trends' 
-                  ? 'bg-brand-lavender text-brand-text scale-105 shadow-sm' 
-                  : 'text-brand-text/60 hover:text-brand-text'
-              }`}>
-                <LineChart className="w-6 h-6" />
-              </div>
-              <span className={`text-[10px] font-sans font-bold mt-1 tracking-wide transition-colors duration-300 ${
-                activeTab === 'trends' ? 'text-brand-text' : 'text-brand-text/60'
-              }`}>
-                Trends
-              </span>
-            </button>
-          </div>
-        )}
-
-        {/* Android Native Gesture Navigation Pill bar */}
-        <button
-          id="android-gesture-home-pill"
-          onClick={onHomeClick}
-          className={`h-6 bg-brand-bg/90 backdrop-blur-md flex flex-col items-center justify-center shrink-0 z-40 transition-all duration-300 cursor-pointer w-full hover:bg-brand-lavender/30 border-none outline-none select-none pb-1 ${!hideNavigation ? 'md:hidden' : ''}`}
-          title="Minimize App / Go to Home Screen"
+      {/* Sleek Side Navigation Drawer (Sidebar) for Tablet & Desktop */}
+      {!hideNavigation && (
+        <aside 
+          id="desktop-sidebar"
+          className="hidden md:flex flex-col w-64 lg:w-72 bg-brand-bg border-r border-brand-text/10 p-6 shrink-0 relative z-40 transition-all duration-300"
         >
-          <div className="w-28 h-1 bg-brand-border/80 rounded-full group-hover:bg-brand-text transition-colors" />
-          <span className="text-[7.5px] font-sans font-extrabold text-brand-text/30 tracking-tight mt-1 uppercase">
-            Tap Pill to Minimize / Restore App
-          </span>
-        </button>
+          {/* Header / Brand logo */}
+          <div className="flex items-center gap-3 mb-8 px-2">
+            <div className="w-10 h-10 rounded-2xl bg-brand-lavender flex items-center justify-center text-brand-peach border border-brand-text/5 shadow-sm overflow-hidden p-1.5">
+              <svg 
+                className="w-full h-full text-brand-text" 
+                viewBox="0 0 100 100" 
+                fill="none" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <circle cx="50" cy="50" r="40" stroke="#FCE6D5" stroke-width="6" fill="none" />
+                <path d="M 50 10 A 40 40 0 0 1 90 50" stroke="#D35271" stroke-width="6" stroke-linecap="round" fill="none" />
+                <g transform="translate(24, 24) scale(0.52)" fill="none" stroke="currentColor" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M 24 50 
+                           C 28 50, 32 47, 36 43
+                           C 40 39, 44 35, 52 35
+                           C 54 35, 56 34, 58 32
+                           C 60 30, 61 27, 65 27
+                           C 69 27, 71 29, 72 32
+                           C 73 35, 71 37, 67 37
+                           C 64 37, 63 39, 64 41
+                           C 65 43, 62 44, 58 44
+                           C 56 47, 55 50, 53 53
+                           C 55 54, 57 54, 58 53
+                           C 59 52, 60 52, 60 53
+                           C 60 54, 59 55, 57 55
+                           C 55 56, 54 57, 53 58
+                           C 51 61, 50 64, 49 68
+                           C 49 71, 51 72, 53 72
+                           L 57 72
+                           C 58 72, 58 71, 57 69
+                           C 56 66, 55 62, 55 59
+                           C 51 59, 48 62, 46 66
+                           C 45 68, 44 71, 45 72
+                           L 49 72
+                           C 50 72, 50 71, 49 69
+                           C 48 66, 47 62, 46 59
+                           C 42 59, 39 58, 36 57
+                           C 28 55, 20 53, 14 53
+                           C 18 52, 21 51, 24 50 Z" />
+                  <circle cx="64" cy="31" r="2.5" fill="currentColor" stroke="none" />
+                </g>
+              </svg>
+            </div>
+            <div>
+              <h1 className="font-serif italic text-lg font-bold text-brand-text leading-tight tracking-wider uppercase">Dinocycle</h1>
+              <span className="text-[9px] font-mono font-bold text-brand-text/45 tracking-wider uppercase">Cycle Intelligence</span>
+            </div>
+          </div>
 
+          {/* Navigation links */}
+          <nav className="flex-1 space-y-2">
+            <button
+              onClick={() => setActiveTab('home')}
+              className={`flex items-center gap-3.5 w-full px-4 py-3.5 rounded-2xl text-xs font-sans font-bold transition-all duration-200 cursor-pointer ${
+                activeTab === 'home'
+                  ? 'bg-brand-lavender text-brand-text shadow-sm border border-brand-text/5'
+                  : 'text-brand-text/60 hover:text-brand-text hover:bg-brand-lavender/30'
+              }`}
+            >
+              <Home className="w-5 h-5 shrink-0" />
+              <span>Home Dashboard</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('calendar')}
+              className={`flex items-center gap-3.5 w-full px-4 py-3.5 rounded-2xl text-xs font-sans font-bold transition-all duration-200 cursor-pointer ${
+                activeTab === 'calendar'
+                  ? 'bg-brand-lavender text-brand-text shadow-sm border border-brand-text/5'
+                  : 'text-brand-text/60 hover:text-brand-text hover:bg-brand-lavender/30'
+              }`}
+            >
+              <Calendar className="w-5 h-5 shrink-0" />
+              <span>Calendar & Logs</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('trends')}
+              className={`flex items-center gap-3.5 w-full px-4 py-3.5 rounded-2xl text-xs font-sans font-bold transition-all duration-200 cursor-pointer ${
+                activeTab === 'trends'
+                  ? 'bg-brand-lavender text-brand-text shadow-sm border border-brand-text/5'
+                  : 'text-brand-text/60 hover:text-brand-text hover:bg-brand-lavender/30'
+              }`}
+            >
+              <LineChart className="w-5 h-5 shrink-0" />
+              <span>Insights & Trends</span>
+            </button>
+          </nav>
+
+          {/* Sidebar Footer Info */}
+          <div className="pt-4 border-t border-brand-text/5 space-y-2">
+            <div className="flex items-center gap-2 text-[10px] text-brand-text/50 font-sans font-semibold">
+              <Database className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+              <span>100% Private Local DB</span>
+            </div>
+            <div className="flex items-center gap-2 text-[10px] text-brand-text/50 font-sans font-semibold">
+              <ShieldAlert className="w-3.5 h-3.5 text-rose-500 shrink-0" />
+              <span>Protected Dinocycle</span>
+            </div>
+          </div>
+        </aside>
+      )}
+
+      {/* Application Core Stage (Dynamic Screen Content) */}
+      <div className="flex-1 flex flex-col overflow-hidden relative bg-brand-bg transition-colors duration-300">
+        {/* Natural Tones Background blur bubbles */}
+        <div className="absolute -bottom-12 -left-12 w-64 h-64 bg-brand-pink rounded-full blur-[80px] opacity-40 pointer-events-none z-0 transition-colors duration-500" />
+        <div className="absolute -top-12 -right-12 w-64 h-64 bg-brand-lavender rounded-full blur-[80px] opacity-40 pointer-events-none z-0 transition-colors duration-500" />
+        
+        <div className="flex-1 flex flex-col z-10 overflow-hidden relative">
+          <div className={`flex-1 flex flex-col overflow-y-auto w-full mx-auto ${!hideNavigation ? 'md:max-w-[1200px] md:px-8 md:py-8' : ''}`}>
+            {children}
+          </div>
+        </div>
       </div>
 
-      {/* Trust & Privacy bottom badge */}
-      <div className={`mt-4 flex items-center gap-1.5 text-xs text-brand-text/70 font-sans font-semibold transition-colors duration-300 ${!hideNavigation ? 'md:hidden' : ''}`}>
-        <span className="text-emerald-600">🛡️</span>
-        <span>Local SQLite Sandbox Active (100% Private, Zero Cloud)</span>
-      </div>
+      {/* Bottom Navigation Bar */}
+      {!hideNavigation && (
+        <div 
+          id="bottom-navigation"
+          className="h-20 bg-brand-bg/90 backdrop-blur-md border-t border-brand-text/5 flex md:hidden justify-around items-center px-4 shrink-0 z-40 transition-colors duration-300"
+        >
+          {/* Dashboard Tab Button */}
+          <button
+            id="nav-btn-home"
+            onClick={() => setActiveTab('home')}
+            className="flex flex-col items-center justify-center flex-1 h-full relative min-h-[48px] touch-manipulation"
+          >
+            <div className={`p-2 rounded-2xl transition-all duration-300 ${
+              activeTab === 'home' 
+                ? 'bg-brand-lavender text-brand-text scale-105 shadow-sm' 
+                : 'text-brand-text/60 hover:text-brand-text'
+            }`}>
+              <Home className="w-6 h-6" />
+            </div>
+            <span className={`text-[10px] font-sans font-bold mt-1 tracking-wide transition-colors duration-300 ${
+              activeTab === 'home' ? 'text-brand-text' : 'text-brand-text/60'
+            }`}>
+              Home
+            </span>
+          </button>
 
+          {/* Calendar Tab Button */}
+          <button
+            id="nav-btn-calendar"
+            onClick={() => setActiveTab('calendar')}
+            className="flex flex-col items-center justify-center flex-1 h-full relative min-h-[48px] touch-manipulation"
+          >
+            <div className={`p-2 rounded-2xl transition-all duration-300 ${
+              activeTab === 'calendar' 
+                ? 'bg-brand-lavender text-brand-text scale-105 shadow-sm' 
+                : 'text-brand-text/60 hover:text-brand-text'
+            }`}>
+              <Calendar className="w-6 h-6" />
+            </div>
+            <span className={`text-[10px] font-sans font-bold mt-1 tracking-wide transition-colors duration-300 ${
+              activeTab === 'calendar' ? 'text-brand-text' : 'text-brand-text/60'
+            }`}>
+              Calendar
+            </span>
+          </button>
+
+          {/* Trends/Logs Tab Button */}
+          <button
+            id="nav-btn-trends"
+            onClick={() => setActiveTab('trends')}
+            className="flex flex-col items-center justify-center flex-1 h-full relative min-h-[48px] touch-manipulation"
+          >
+            <div className={`p-2 rounded-2xl transition-all duration-300 ${
+              activeTab === 'trends' 
+                ? 'bg-brand-lavender text-brand-text scale-105 shadow-sm' 
+                : 'text-brand-text/60 hover:text-brand-text'
+            }`}>
+              <LineChart className="w-6 h-6" />
+            </div>
+            <span className={`text-[10px] font-sans font-bold mt-1 tracking-wide transition-colors duration-300 ${
+              activeTab === 'trends' ? 'text-brand-text' : 'text-brand-text/60'
+            }`}>
+              Trends
+            </span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

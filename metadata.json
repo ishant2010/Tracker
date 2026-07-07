@@ -1,6 +1,6 @@
 {
   "name": "Period Tracker",
-  "description": "A privacy-focused offline period and menstrual cycle tracker with an elegant, comforting aesthetic.",
+  "description": "DINOCYCLE - A dinosaur-themed, privacy-focused offline period and menstrual cycle tracker with an elegant, comforting aesthetic.",
   "requestFramePermissions": ["microphone"],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

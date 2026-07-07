@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <!-- Square background for maskable compatibility -->
+  <rect width="512" height="512" fill="#FDF9F3"/>
+  
+  <!-- Outer concentric ring (matching the pink track in the image) -->
+  <circle cx="256" cy="256" r="160" stroke="#F7D9E3" stroke-width="24" fill="none" />
+  
+  <!-- Highlight progress arc on the ring -->
+  <path d="M 256 96 A 160 160 0 0 1 416 256" stroke="#D35271" stroke-width="24" fill="none" stroke-linecap="round" />
+  
+  <!-- Sleek ticks around the ring -->
+  <line x1="256" y1="80" x2="256" y2="112" stroke="#3C2A3F" stroke-width="3" />
+  <line x1="336" y1="102" x2="320" y2="130" stroke="#3C2A3F" stroke-width="3" />
+  <line x1="400" y1="156" x2="372" y2="172" stroke="#3C2A3F" stroke-width="3" />
+  <line x1="432" y1="232" x2="400" y2="232" stroke="#3C2A3F" stroke-width="3" />
+  
+  <!-- Central Cute T-Rex (scale and center) -->
+  <g transform="translate(153, 146) scale(2.2)" fill="none" stroke="#3C2A3F" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <!-- T-Rex Path -->
+    <path d="M 24 50 
+             C 28 50, 32 47, 36 43
+             C 40 39, 44 35, 52 35
+             C 54 35, 56 34, 58 32
+             C 60 30, 61 27, 65 27
+             C 69 27, 71 29, 72 32
+             C 73 35, 71 37, 67 37
+             C 64 37, 63 39, 64 41
+             C 65 43, 62 44, 58 44
+             C 56 47, 55 50, 53 53
+             C 55 54, 57 54, 58 53
+             C 59 52, 60 52, 60 53
+             C 60 54, 59 55, 57 55
+             C 55 56, 54 57, 53 58
+             C 51 61, 50 64, 49 68
+             C 49 71, 51 72, 53 72
+             L 57 72
+             C 58 72, 58 71, 57 69
+             C 56 66, 55 62, 55 59
+             C 51 59, 48 62, 46 66
+             C 45 68, 44 71, 45 72
+             L 49 72
+             C 50 72, 50 71, 49 69
+             C 48 66, 47 62, 46 59
+             C 42 59, 39 58, 36 57
+             C 28 55, 20 53, 14 53
+             C 18 52, 21 51, 24 50 Z" />
+    <!-- T-Rex Eye -->
+    <circle cx="64" cy="31" r="2.5" fill="#3C2A3F" stroke="none" />
+  </g>
+</svg>

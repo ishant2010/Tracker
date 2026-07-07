@@ -301,7 +301,7 @@ export function OnboardingScreen({ onComplete }: OnboardingScreenProps) {
           whileHover={{ scale: 1.01 }}
           className="w-full py-4 bg-[#3C2A3F] hover:bg-[#523B56] text-white rounded-full font-sans font-bold text-xs shadow-md flex items-center justify-center gap-1.5 transition-all cursor-pointer"
         >
-          {step === 3 ? 'Step into Your Sanctuary' : 'Continue'}
+          {step === 3 ? 'Step into DINOCYCLE' : 'Continue'}
           <ChevronRight className="w-4 h-4" />
         </motion.button>
       </div>
