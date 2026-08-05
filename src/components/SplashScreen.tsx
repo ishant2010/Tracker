@@ -64,9 +64,9 @@ export function SplashScreen() {
               fill="none" 
               xmlns="http://www.w3.org/2000/svg"
             >
-              <circle cx="50" cy="50" r="40" stroke="#F7D9E3" stroke-width="6" fill="none" />
-              <path d="M 50 10 A 40 40 0 0 1 90 50" stroke="#D35271" stroke-width="6" stroke-linecap="round" fill="none" />
-              <g transform="translate(24, 24) scale(0.52)" fill="none" stroke="#3C2A3F" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="50" cy="50" r="40" stroke="#F7D9E3" strokeWidth="6" fill="none" />
+              <path d="M 50 10 A 40 40 0 0 1 90 50" stroke="#D35271" strokeWidth="6" strokeLinecap="round" fill="none" />
+              <g transform="translate(24, 24) scale(0.52)" fill="none" stroke="#3C2A3F" strokeWidth="4.5" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M 24 50 
                          C 28 50, 32 47, 36 43
                          C 40 39, 44 35, 52 35

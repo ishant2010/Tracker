@@ -4,7 +4,7 @@
  */
 
 import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { db } from './firebase';
+import { db, auth } from './firebase';
 import { roomDb, PeriodLogEntity, UserSettingsEntity } from './roomDb';
 
 export interface SyncResult {
@@ -19,12 +19,18 @@ export async function pushLocalToFirebase(uid: string): Promise<SyncResult> {
   try {
     const logs = roomDb.getAllLogs();
     const settings = roomDb.getUserSettings();
+    const currentUser = auth.currentUser;
 
     const userDocRef = doc(db, 'users', uid);
     await setDoc(userDocRef, {
+      uid: uid,
+      email: currentUser?.email || 'Anonymous',
+      displayName: currentUser?.displayName || roomDb.getSetting('user_display_name', 'Anonymous User'),
       period_logs: logs,
       user_settings: settings,
-      syncedAt: new Date().toISOString()
+      totalLogsCount: logs.length,
+      syncedAt: new Date().toISOString(),
+      lastActive: new Date().toISOString()
     }, { merge: true });
 
     return { success: true, message: 'Local data pushed to cloud vault successfully. 🌸' };
@@ -47,6 +53,7 @@ export async function syncBidirectional(uid: string): Promise<SyncResult> {
 
     const localLogs = roomDb.getAllLogs();
     const localSettings = roomDb.getUserSettings();
+    const currentUser = auth.currentUser;
 
     if (!docSnap.exists()) {
       // No cloud data yet, perform a full push
@@ -104,9 +111,14 @@ export async function syncBidirectional(uid: string): Promise<SyncResult> {
 
     // Update Firestore to make sure both sides are fully synchronized
     await setDoc(userDocRef, {
+      uid: uid,
+      email: currentUser?.email || remoteData.email || 'Anonymous',
+      displayName: currentUser?.displayName || roomDb.getSetting('user_display_name', 'Anonymous User'),
       period_logs: finalLogs,
       user_settings: finalSettings,
-      syncedAt: new Date().toISOString()
+      totalLogsCount: finalLogs.length,
+      syncedAt: new Date().toISOString(),
+      lastActive: new Date().toISOString()
     }, { merge: true });
 
     return { success: true, message: 'Cloud database merged and synchronized perfectly. 🌸' };

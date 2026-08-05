@@ -24,7 +24,8 @@ import {
   Sun,
   Laptop,
   Database,
-  RefreshCw
+  RefreshCw,
+  ShieldCheck
 } from 'lucide-react';
 import { roomDb } from '../db/roomDb';
 import { auth, signOut, updateProfile, deleteUser } from '../db/firebase';
@@ -34,6 +35,7 @@ interface SettingsScreenProps {
   onClose: () => void;
   onThemeChanged: (theme: string) => void;
   onDbUpdated: () => void;
+  onOpenAdminMonitor?: () => void;
 }
 
 // Preset pastel avatar gradient colors
@@ -45,8 +47,21 @@ const PRESET_AVATARS = [
   { id: 'sky', class: 'bg-gradient-to-tr from-[#EBF5FB] to-[#AED6F1]', emoji: '✨' },
 ];
 
-export function SettingsScreen({ onClose, onThemeChanged, onDbUpdated }: SettingsScreenProps) {
+export function SettingsScreen({ onClose, onThemeChanged, onDbUpdated, onOpenAdminMonitor }: SettingsScreenProps) {
   const user = auth.currentUser;
+  const [secretTapCount, setSecretTapCount] = useState(0);
+  const [showAdminSecret, setShowAdminSecret] = useState(false);
+
+  const ADMIN_EMAILS = ['ishant.optimus@gmail.com', 'advocatepravin76@gmail.com'];
+  const isAdminUser = (user?.email && ADMIN_EMAILS.includes(user.email.toLowerCase())) || showAdminSecret;
+
+  const handleFooterSecretTap = () => {
+    const newCount = secretTapCount + 1;
+    setSecretTapCount(newCount);
+    if (newCount >= 5) {
+      setShowAdminSecret(true);
+    }
+  };
 
   // PWA & Installation states
   const [isStandalone, setIsStandalone] = useState(false);
@@ -669,6 +684,36 @@ export function SettingsScreen({ onClose, onThemeChanged, onDbUpdated }: Setting
           </div>
         )}
 
+        {/* Host & Admin Access Portal Section - Only visible to Admin (ishant.optimus@gmail.com) */}
+        {isAdminUser && (
+          <div className="bg-[#3C2A3F] text-white rounded-[28px] p-5 border border-brand-text/10 space-y-3 shadow-md animate-fade-in">
+            <div className="flex items-center justify-between">
+              <span className="text-[9px] uppercase tracking-widest text-[#F7D9E3] font-bold font-mono flex items-center gap-1.5">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" /> Host & Admin Monitoring
+              </span>
+              <span className="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 text-[8.5px] font-mono font-bold uppercase">
+                ADMIN CONFIDENTIAL
+              </span>
+            </div>
+
+            <p className="text-[10.5px] text-white/70 font-sans leading-relaxed">
+              Real-time user monitoring active for <strong className="text-amber-300 font-mono">{user?.email || 'Admin'}</strong>. View live history, logs & visuals across all users.
+            </p>
+
+            <button
+              onClick={() => {
+                if (onOpenAdminMonitor) onOpenAdminMonitor();
+              }}
+              className="w-full h-11 px-4 rounded-xl bg-white/10 hover:bg-white/20 text-white font-sans font-bold text-xs uppercase tracking-wider flex items-center justify-between transition-all cursor-pointer border border-white/10"
+            >
+              <span className="flex items-center gap-2">
+                <ShieldCheck className="w-4 h-4 text-emerald-400" /> Launch Host Admin Portal
+              </span>
+              <ChevronRight className="w-3.5 h-3.5 opacity-60" />
+            </button>
+          </div>
+        )}
+
         {/* Account Management Actions */}
         <div className="bg-white/60 rounded-[28px] p-5 border border-brand-text/5 space-y-3">
           <span className="text-[9px] uppercase tracking-widest text-[#3C2A3F]/50 font-bold font-sans flex items-center gap-1">
@@ -708,9 +753,12 @@ export function SettingsScreen({ onClose, onThemeChanged, onDbUpdated }: Setting
       </div>
 
       {/* Footer Branding */}
-      <div className="h-14 px-6 border-t border-brand-text/5 flex items-center justify-center bg-white/40 backdrop-blur-md shrink-0">
+      <div 
+        onClick={handleFooterSecretTap}
+        className="h-14 px-6 border-t border-brand-text/5 flex items-center justify-center bg-white/40 backdrop-blur-md shrink-0 cursor-pointer select-none"
+      >
         <span className="text-[9px] font-mono font-bold tracking-widest text-[#3C2A3F]/40 uppercase text-center flex items-center gap-1.5 justify-center">
-          🌿 SISTERHOOD SECURE VAULT ACTIVE
+          🌿 DINOCYCLE SECURE VAULT ACTIVE {showAdminSecret ? '(ADMIN UNLOCKED)' : ''}
         </span>
       </div>
 

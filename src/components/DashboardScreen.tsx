@@ -5,7 +5,7 @@
 
 import React, { useMemo, useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Sparkles, CalendarHeart, Droplet, Coffee, Moon, Heart, GlassWater, Plus, RotateCcw, MessageCircle, Send, Mic, Bot, User, X, Globe, Volume2, VolumeX, Paperclip, Image, Camera, Settings } from 'lucide-react';
+import { Sparkles, CalendarHeart, Droplet, Coffee, Moon, Heart, GlassWater, Plus, RotateCcw, MessageCircle, Send, Mic, Bot, User, X, Globe, Volume2, VolumeX, Paperclip, Image, Camera, Settings, Radio } from 'lucide-react';
 import { roomDb, formatDate, parseDateString } from '../db/roomDb';
 
 interface DashboardScreenProps {
@@ -269,6 +269,27 @@ export function DashboardScreen({ onOpenLog, stats, todayStr, onDbUpdated, onOpe
           </motion.button>
         </div>
       </div>
+
+      {/* Host Announcement Notice Banner if active */}
+      {roomDb.getSetting('admin_broadcast_notice', '') && (
+        <motion.div
+          initial={{ opacity: 0, y: -8 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="bg-[#E9E3F5] border border-[#3C2A3F]/15 rounded-[28px] p-4 flex gap-3.5 items-start shadow-sm"
+        >
+          <div className="w-9 h-9 rounded-2xl bg-[#3C2A3F] text-white flex items-center justify-center shrink-0 shadow-xs">
+            <Radio className="w-4.5 h-4.5 text-[#F7D9E3] animate-pulse" />
+          </div>
+          <div className="space-y-0.5">
+            <span className="text-[9px] font-mono font-bold text-[#3C2A3F]/55 uppercase tracking-widest">
+              HOST ANNOUNCEMENT
+            </span>
+            <p className="text-xs text-[#3C2A3F] font-sans font-bold leading-relaxed">
+              {roomDb.getSetting('admin_broadcast_notice', '')}
+            </p>
+          </div>
+        </motion.div>
+      )}
 
       {/* Grid Layout Wrapper */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">

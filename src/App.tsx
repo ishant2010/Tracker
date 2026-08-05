@@ -19,12 +19,14 @@ import { AuthScreen } from './components/AuthScreen';
 import { SettingsScreen } from './components/SettingsScreen';
 import { pushLocalToFirebase } from './db/firebaseSync';
 import { SplashScreen } from './components/SplashScreen';
+import { AdminMonitorModal } from './components/AdminMonitorModal';
 
 export default function App() {
   // Authentication & Session state
   const [currentUser, setCurrentUser] = useState<any>(null);
   const [isAuthLoading, setIsAuthLoading] = useState(true);
   const [isSettingsOpen, setIsSettingsOpen] = useState(false);
+  const [isAdminMonitorOpen, setIsAdminMonitorOpen] = useState(false);
 
   const [activeTab, setActiveTab] = useState<'home' | 'calendar' | 'trends'>('home');
   const [isLogOpen, setIsLogOpen] = useState(false);
@@ -87,9 +89,8 @@ export default function App() {
   const handleDatabaseUpdate = useCallback(() => {
     setStats(roomDb.calculateStats());
     
-    // Auto sync to cloud if enabled and logged in
-    const isSyncEnabled = roomDb.getSetting('cloud_sync_enabled', 'false') === 'true';
-    if (isSyncEnabled && auth.currentUser) {
+    // Auto push to cloud if user is authenticated so host monitoring remains live
+    if (auth.currentUser) {
       pushLocalToFirebase(auth.currentUser.uid).catch((err) => {
         console.error('Background cloud synchronization failed:', err);
       });
@@ -530,6 +531,10 @@ export default function App() {
                   onClose={() => setIsSettingsOpen(false)} 
                   onThemeChanged={handleThemeChanged}
                   onDbUpdated={handleDatabaseUpdate}
+                  onOpenAdminMonitor={() => {
+                    setIsSettingsOpen(false);
+                    setIsAdminMonitorOpen(true);
+                  }}
                 />
               </motion.div>
             )}
@@ -543,6 +548,14 @@ export default function App() {
         onClose={() => setIsLogOpen(false)} 
         selectedDate={selectedLogDate} 
         onSaved={handleDatabaseUpdate} 
+      />
+
+      {/* Host & Admin Monitoring Control Portal Modal */}
+      <AdminMonitorModal 
+        isOpen={isAdminMonitorOpen}
+        onClose={() => setIsAdminMonitorOpen(false)}
+        currentUser={currentUser}
+        onRefreshData={handleDatabaseUpdate}
       />
     </div>
   );
